@@ -7,11 +7,11 @@ import os
 
 class MesonInstallerConan(ConanFile):
     name = "meson_installer"
-    version = "0.49.0"
+    version = "0.49.2"
     description = "Meson is a project to create the best possible next-generation build system"
     topics = ("conan", "meson", "mesonbuild", "build-system")
     url = "https://github.com/bincrafters/conan-meson_installer"
-    homepage = "https://mesonbuild.com/"
+    homepage = "https://github.com/mesonbuild/meson"
     author = "Bincrafters <bincrafters@gmail.com>"
     license = "	Apache-2.0"
     no_copy_source = True
@@ -27,9 +27,8 @@ exec "$meson_dir/meson.py" "$@"
 """
 
     def source(self):
-        source_url = "https://github.com/mesonbuild/meson"
-        tools.get("{0}/archive/{1}.tar.gz".format(source_url, self.version),
-                  sha256="11bc959e7173e714e4a4e85dd2bd9d0149b0a51c8ba82d5f44cc63735f603c74")
+        tools.get("{0}/archive/{1}.tar.gz".format(self.homepage, self.version),
+                  sha256="f0aebfa97ed4fb5d2a6d60ac36d0f7173c5797c545299674d971c0c8269efd5c")
         extracted_dir = "meson-" + self.version
         self.run("dir")
         os.rename(extracted_dir, self._source_subfolder)
