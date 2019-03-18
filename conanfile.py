@@ -15,7 +15,7 @@ class MesonInstallerConan(ConanFile):
     author = "Bincrafters <bincrafters@gmail.com>"
     license = "	Apache-2.0"
     no_copy_source = True
-    exports = ["LICENSE.md"]
+    exports = ["LICENSE.md", "5111.diff"]
     requires = "ninja_installer/1.8.2@bincrafters/stable"
     _source_subfolder = "source_subfolder"
     _meson_cmd = """@echo off
@@ -38,6 +38,7 @@ exec "$meson_dir/meson.py" "$@"
             f.write(self._meson_cmd)
         with open(os.path.join(self._source_subfolder, "meson"), "w") as f:
             f.write(self._meson_sh)
+        tools.patch(self._source_subfolder, "5111.diff")
 
     @staticmethod
     def _chmod_plus_x(filename):
